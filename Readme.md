@@ -1,4 +1,4 @@
-# ![Coupon Hub Icon](<img src="https://res.cloudinary.com/dkslm53fp/image/upload/v1737990496/CouponHub/uyy5m4os5islybzaf6zd.png" width="200px" height="100">) Coupon Hub Backend 🚀
+# <img src="https://res.cloudinary.com/dkslm53fp/image/upload/v1737990496/CouponHub/uyy5m4os5islybzaf6zd.png" width="200px" height="100"> Coupon Hub Backend 🚀
 
 Coupon Hub Backend is the API service for managing coupons, user data, and authentication for the Coupon Hub project. It is built with Node.js and Express and is deployed on [Render](https://render.com). The frontend is hosted on [Netlify](https://netlify.com) and connects to this backend via CORS.
 
