@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({
     origin: process.env.CORS_ORIGIN || '*',
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json({ limit: "16kb" }));
@@ -40,8 +40,15 @@ app.use((err, req, res, next) => {
             data: err.data
         });
     }
-    console.error(err);
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+
+    console.error("Unhandled error:", err);
+
+    const isProduction = process.env.NODE_ENV === "production";
+    res.status(500).json({
+        success: false,
+        message: isProduction ? "Internal Server Error" : err.message,
+        errors: isProduction ? [] : [err.stack]
+    });
 });
 
 export { app };

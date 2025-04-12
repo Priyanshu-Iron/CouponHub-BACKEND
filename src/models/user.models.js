@@ -41,13 +41,13 @@ const userSchema = new Schema(
     city: {
       type: String
     },
-    // avatar: {
-    //   type: String, // Cloudinary URL
-    //   required: true,
-    // },
-    // coverImage: {
-    //   type: String, // Cloudinary URL
-    // },
+    avatar: {
+      type: String, // Cloudinary URL
+      required: true,
+    },
+    coverImage: {
+      type: String, // Cloudinary URL
+    },
     password: {
       type: String,
       required: [true, 'Password is required'],
