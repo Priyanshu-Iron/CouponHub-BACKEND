@@ -1,4 +1,4 @@
-# <img src="https://res.cloudinary.com/dkslm53fp/image/upload/v1737990496/CouponHub/uyy5m4os5islybzaf6zd.png" width="200px" height="100"> Coupon Hub Backend 🚀
+Coupon Hub Backend 🚀
 # <img src="https://res.cloudinary.com/dkslm53fp/image/upload/v1737990496/CouponHub/uyy5m4os5islybzaf6zd.png" width="200px" height="100"> 
 Coupon Hub Backend 🚀
 
