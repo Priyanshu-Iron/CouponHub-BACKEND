@@ -15,7 +15,7 @@ const couponSchema = new mongoose.Schema({
     notifications: [{
         userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         message: { type: String },
-        status: { type: String, enum: ['pending', 'accepted', 'declined'] },
+        status: { type: String, enum: ['pending', 'accepted', 'rejected',  'canceled'] },
         couponId: { type: mongoose.Schema.Types.ObjectId, ref: 'Coupon' },
         couponName: { type: String },
         read: { type: Boolean, default: false },

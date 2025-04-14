@@ -1,3 +1,4 @@
+// coupon.routes.js
 import express from "express";
 import { upload, handleMulterError } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -11,7 +12,8 @@ import {
     getOtherUserCoupons,
     requestCouponAccess,
     handleNotificationResponse,
-    getNotifications
+    getNotifications,
+    cancelCouponRequest // New controller
 } from "../controllers/coupon.controllers.js";
 
 const router = express.Router();
@@ -31,7 +33,7 @@ router.put("/:id",
     updateCoupon
 );
 
-// Other routes remain the same
+// Other routes
 router.get("/", verifyJWT, getCoupons);
 router.post('/notifications/:notificationId/:action', verifyJWT, handleNotificationResponse);
 router.get("/notifications", verifyJWT, getNotifications);
@@ -40,5 +42,6 @@ router.get("/user", verifyJWT, getUserCoupons);
 router.get("/:id", verifyJWT, getCouponById);
 router.delete("/:id", verifyJWT, deleteCoupon);
 router.post("/:id/request-access", verifyJWT, requestCouponAccess);
+router.post("/:id/cancel-request", verifyJWT, cancelCouponRequest); // New route
 
 export default router;

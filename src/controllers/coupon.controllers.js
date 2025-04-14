@@ -312,6 +312,49 @@ const handleNotificationResponse = asyncHandler(async (req, res) => {
     );
 });
 
+const cancelCouponRequest = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const coupon = await Coupon.findById(id);
+    if (!coupon) {
+        throw new ApiError(404, "Coupon not found");
+    }
+
+    // Find the pending notification before removing it
+    const pendingNotification = coupon.notifications.find(
+        notification => notification.userId.toString() === userId.toString() && notification.status === "pending"
+    );
+
+    if (!pendingNotification) {
+        throw new ApiError(404, "No pending request found to cancel");
+    }
+
+    // Create a cancellation notification for the coupon owner
+    const cancelNotification = {
+        userId: userId,
+        message: `User ${req.user.username} has canceled their request for access to coupon "${coupon.name}"`,
+        read: false,
+        status: 'canceled',
+        couponId: coupon._id,
+        couponName: coupon.name
+    };
+
+    // Remove the pending notification
+    coupon.notifications = coupon.notifications.filter(
+        notification => !(notification.userId.toString() === userId.toString() && notification.status === "pending")
+    );
+
+    // Add the cancellation notification
+    coupon.notifications.push(cancelNotification);
+
+    await coupon.save();
+
+    return res.status(200).json(
+        new ApiResponse(200, {}, "Request canceled successfully")
+    );
+});
+
 export {
     createCoupon,
     getCoupons,
@@ -323,4 +366,5 @@ export {
     requestCouponAccess,
     handleNotificationResponse,
     getNotifications,
+    cancelCouponRequest,
 };
